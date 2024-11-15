@@ -11,6 +11,11 @@ from threading import Thread
 from queue import Queue, Empty
 from src.tts.synthesization_options import SynthesizationOptions
 
+# Override default StreamHandler encoding to utf-8
+for handler in logging.getLogger().handlers:
+    if isinstance(handler, logging.StreamHandler):
+        handler.setStream(open(handler.stream.name, 'w', encoding='utf-8'))
+
 # https://stackoverflow.com/a/4896288/25532567
 ON_POSIX = 'posix' in sys.builtin_module_names
 
