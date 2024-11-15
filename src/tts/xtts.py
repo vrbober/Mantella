@@ -13,6 +13,11 @@ from src.tts.synthesization_options import SynthesizationOptions
 from src import utils
 from threading import Thread
 
+# Override default StreamHandler encoding to utf-8
+for handler in logging.getLogger().handlers:
+    if isinstance(handler, logging.StreamHandler):
+        handler.setStream(open(handler.stream.name, 'w', encoding='utf-8'))
+
 class TTSServiceFailure(Exception):
     pass
 
