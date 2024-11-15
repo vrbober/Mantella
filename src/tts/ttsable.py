@@ -12,6 +12,11 @@ import time
 from src.tts.synthesization_options import SynthesizationOptions
 import requests
 
+# Override default StreamHandler encoding to utf-8
+for handler in logging.getLogger().handlers:
+    if isinstance(handler, logging.StreamHandler):
+        handler.setStream(open(handler.stream.name, 'w', encoding='utf-8'))
+
 class ttsable(ABC):
     """Base class for different TTS services
     """
